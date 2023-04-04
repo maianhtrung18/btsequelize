@@ -1,0 +1,16 @@
+{
+  "name": "BTSequelize",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.2.0",
+    "nodemon": "^2.0.22",
+    "sequelize": "^6.30.0",
+    "sequelize-auto": "^0.8.8"
+  },
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  }
+}
