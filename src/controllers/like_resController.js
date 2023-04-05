@@ -50,9 +50,25 @@ const getLikeRes = async (req, res) => {
     catch (e) {
         await errorCode(res, 'BE error') 
     }
+}
+
+const getLikeResAndUser = async (req, res) => {
+    try{
+        let {res_id} = req.query
+        let data = await models.like_res.findAll({
+            include: ["re","user"],
+            // attributes:['res_id',[sequelize.fn('COUNT', sequelize.col('user_id')),'user_id']],
+            // group: "res_id"
+        })
+        success(res, data, 'success')
+    }
+    catch(e){
+        await errorCode(res, 'Be error')
+        console.log(e)
+    }
 
 }
 
 
 
-module.exports = { likeRes, getLikeRes, unlike }
+module.exports = { likeRes, getLikeRes, unlike, getLikeResAndUser }
