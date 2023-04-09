@@ -7,11 +7,34 @@ const orderFood = async (req, res) => {
 
     try {
         let { user_id, food_id, amount, code, arr_sub_id } = req.body
-        let arr_sub_id1 = arr_sub_id.toString()
-        let data = await models.order.create({
-            user_id, food_id, amount, code, arr_sub_id
+
+        let data1 = await models.order.findOne({
+            where: {
+                user_id,
+                food_id
+            }
         })
-        res.send(data)
+
+        if (data1) {
+            let data = await models.order.update({
+                amount, code, arr_sub_id
+            },
+                {
+                    where: {
+                        user_id,
+                        food_id
+                    }
+                }
+            )
+            success(res, data, "success")
+        }
+        else {
+            let data = await models.order.create({
+                user_id, food_id, amount, code, arr_sub_id
+            })
+            success(res, data, "success")
+        }
+
     }
     catch (e) {
         console.log(e)
